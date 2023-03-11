@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import axios from 'axios'
+import "aframe"
+import Text from "../components/Text"
 
 function Chart() {
   const [data, setData] = React.useState([])
+
+  const sceneRef = React.useRef()
 
   React.useEffect(() =>{
       const fetchData = async () =>{
@@ -43,19 +47,31 @@ function Chart() {
       if(cached){
         const cachedData = JSON.parse(cached);
         setData(cachedData.values);
-        console.log("cached", cachedData);
+        // console.log("cached", cachedData);
       }else{
       fetchData();
       console.log("trying to fetch")
       }
   },[])
 
-  console.log(data)
+  // console.log(data)
 
   return (
-    <div>
-      <h1>Bar</h1>
-    </div>
+    <>
+     <a-scene cursor="rayOrigin: mouse" ref={sceneRef}>
+        <a-entity
+          camera=""
+          position="0 6 12"
+          wasd-controls=""
+          rotation="0 700 100"
+          look-controls=""
+          aframe-injected=""
+          data-aframe-inspector-original-camera=""
+        ></a-entity>
+        <Text value="Climate data of Bangor University" position="0 0.5 2"/>
+
+        </a-scene>
+    </>
   )
 }
 
