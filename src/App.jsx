@@ -1,6 +1,6 @@
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import './App.css'
-import Chart from "./pages/Chart"
+import ModuleErrorBoundary from "./components/ErrorBoundary"
 
 function App() {
 
@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route element={<Chart />} path="/" />
+          <Route element={<ModuleErrorBoundary />} path="/" />
         </Routes>
       </Router>
     </div>
