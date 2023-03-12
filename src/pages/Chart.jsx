@@ -3,6 +3,8 @@ import axios from "axios";
 import "aframe";
 import * as d3 from "d3"
 import Text from "../components/Text";
+import {toast, ToastContainer} from "react-toastify"
+import "react-toastify/dist/ReactToastify.css";
 
 function Chart() {
   const [data, setData] = React.useState([]);
@@ -82,6 +84,8 @@ function Chart() {
           "#c00000",
         ]);
 
+      const xDate = d3.scaleBand().domain([data.datetimeStr]).range([0, width])
+
   React.useEffect(() =>{
 
     if(data.length > 1){
@@ -106,6 +110,10 @@ function Chart() {
       .attr("color", (d) => xColor(d.temp))
       .attr("shadow", "cast: true; receive: true;")
       .attr("height", (d) => heightScale(d.temp))
+      .attr(
+        "animation",
+        "property: rotation; to: 0 360 0; loop: true; dur: 20000"
+      )
       .attr("position", (d, i) => {
         const x = (i * 1.5) - 5 ;
         const y = heightScale(d.temp) / 2;
@@ -119,7 +127,6 @@ function Chart() {
       box.selectAll("a-box")
       .data(data)
       .attr("color", "red")
-      .attr("shadow", "cast: true; receive: true;")
       .attr("height", (d) => heightScale(d.cloudcover))
       .attr("position", (d, i) => {
         const x = (i * 1.5) - 5 ;
@@ -134,7 +141,6 @@ function Chart() {
       box.selectAll("a-box")
       .data(data)
       .attr("color", "magenta")
-      .attr("shadow", "cast: true; receive: true;")
       .attr("height", (d) => heightScale(d.wspd))
       .attr("position", (d, i) => {
         const x = (i * 1.5) - 5 ;
@@ -149,7 +155,6 @@ function Chart() {
       box.selectAll("a-box")
       .data(data)
       .attr("color", "blue")
-      .attr("shadow", "cast: true; receive: true;")
       .attr("height", (d) => heightScale(d.solarradiation))
       .attr("position", (d, i) => {
         const x = (i * 1.5) - 5 ;
@@ -164,7 +169,6 @@ function Chart() {
       box.selectAll("a-box")
       .data(data)
       .attr("color", "yellow")
-      .attr("shadow", "cast: true; receive: true;")
       .attr("height", (d) => heightScale(d.wgust))
       .attr("position", (d, i) => {
         const x = (i * 1.5) - 5 ;
@@ -179,11 +183,12 @@ function Chart() {
 
   return (
     <>
+    <ToastContainer />
       <a-scene cursor="rayOrigin: mouse" stats ref={sceneRef}>
         <a-entity
           camera=""
-          position="0 10 17"
-          look-controls=""
+          position="0 10 20"
+          
         ></a-entity>
         <Text
           id="center"
@@ -204,7 +209,17 @@ function Chart() {
         {
           data.map((item, index) =>{
             return(
-              <a-box key={index} onClick={() => console.log(`On ${item.datetimeStr}, weather condition is ${item.conditions}, weather type is ${item.weathertype}`)}></a-box>
+              <a-box key={index} onClick={() => {
+                toast.success(
+                  <>
+                  <h2>On {item.datetimeStr}</h2>
+                  <h3>Temperature: {item.temp}</h3>
+                  <h3>Weather Condition: {item.conditions}</h3>
+                  <h3>Weather Type: {item.weathertype}</h3>
+                  <h3>Sea Level Pressure: {item.sealevelpressure}</h3>
+                  </>
+                )
+              }}></a-box>
             )
           })
         }
