@@ -86,6 +86,14 @@ function Chart() {
 
       const xDate = d3.scaleBand().domain([data.datetimeStr]).range([0, width])
 
+      const tickValues = heightScale.ticks(10);
+
+  // const tick = d3
+  //   .scaleBand()
+  //   .domain(data.dates)
+  //   .range([0, 18])
+  //   .padding(0.000009);
+
   React.useEffect(() =>{
 
     if(data.length > 1){
@@ -105,10 +113,10 @@ function Chart() {
 
     if(data.length > 1){
       const box = d3.select(temperatureRef.current)
-      box.selectAll("a-box")
+      box.selectAll("a-cylinder")
       .data(data)
       .attr("color", (d) => xColor(d.temp))
-      .attr("shadow", "cast: true; receive: true;")
+      .attr("radius", "0.6")
       .attr("height", (d) => heightScale(d.temp))
       .attr(
         "animation",
@@ -124,9 +132,10 @@ function Chart() {
 
     if(data.length > 1){
       const box = d3.select(cloudRef.current)
-      box.selectAll("a-box")
+      box.selectAll("a-cylinder")
       .data(data)
-      .attr("color", "red")
+      .attr("color", "crimson")
+      .attr("radius", "0.6")
       .attr("height", (d) => heightScale(d.cloudcover))
       .attr("position", (d, i) => {
         const x = (i * 1.5) - 5 ;
@@ -138,9 +147,10 @@ function Chart() {
 
     if(data.length > 1){
       const box = d3.select(windRef.current)
-      box.selectAll("a-box")
+      box.selectAll("a-cylinder")
       .data(data)
       .attr("color", "magenta")
+      .attr("radius", "0.6")
       .attr("height", (d) => heightScale(d.wspd))
       .attr("position", (d, i) => {
         const x = (i * 1.5) - 5 ;
@@ -152,9 +162,10 @@ function Chart() {
 
     if(data.length > 1){
       const box = d3.select(solarRef.current)
-      box.selectAll("a-box")
+      box.selectAll("a-cylinder")
       .data(data)
       .attr("color", "blue")
+      .attr("radius", "0.6")
       .attr("height", (d) => heightScale(d.solarradiation))
       .attr("position", (d, i) => {
         const x = (i * 1.5) - 5 ;
@@ -166,9 +177,10 @@ function Chart() {
 
     if(data.length > 1){
       const box = d3.select(wgustRef.current)
-      box.selectAll("a-box")
+      box.selectAll("a-cylinder")
       .data(data)
       .attr("color", "yellow")
+      .attr("radius", "0.6")
       .attr("height", (d) => heightScale(d.wgust))
       .attr("position", (d, i) => {
         const x = (i * 1.5) - 5 ;
@@ -195,6 +207,18 @@ function Chart() {
           value="Climate data for Bangor University"
           position="0 0.5 2"
         />
+        {
+          tickValues.map((item, index) => {
+            // console.log(item)
+            return(
+              <>
+              <a-entity key={index} line={`start: -7.2 ${heightScale(item)} -6; end: 7.4 ${heightScale(item)} -6; color: lightblue`}></a-entity>
+              <a-entity key={index + 20} line={`start: 7.4 ${heightScale(item)} -6; end: 7.4 ${heightScale(item)} 5; color: lightblue`}></a-entity>
+              </>
+            )
+          })
+        }
+        {/* <a-entity line="start: -7.2 5 3; end: 7.2 5 3; color: red"></a-entity> */}
 
         {/* <a-entity ref={humidityRef}>
         {
@@ -209,7 +233,7 @@ function Chart() {
         {
           data.map((item, index) =>{
             return(
-              <a-box key={index} onClick={() => {
+              <a-cylinder key={index} onClick={() => {
                 toast.success(
                   <>
                   <h2>On {item.datetimeStr}</h2>
@@ -219,7 +243,7 @@ function Chart() {
                   <h3>Sea Level Pressure: {item.sealevelpressure}</h3>
                   </>
                 )
-              }}></a-box>
+              }}></a-cylinder>
             )
           })
         }
@@ -228,16 +252,25 @@ function Chart() {
         {
           data.map((item, index) =>{
             return(
-              <a-box key={index} onClick={() => console.log(item.clouds `On ${item.datetimeStr}, weather condition is ${item.conditions}, weather type is ${item.weathertype}`)}></a-box>
-            )
-          })
-        }
+              <a-cylinder key={index} onClick={() => {
+                toast.success(
+                  <>
+                  <h2>On {item.datetimeStr}</h2>
+                  <h3>Cloud Cover: {item.cloudcover}</h3>
+                  <h3>Weather Condition: {item.conditions}</h3>
+                  <h3>Weather Type: {item.weathertype}</h3>
+                  <h3>Sea Level Pressure: {item.sealevelpressure}</h3>
+                  </>
+                )
+              }}></a-cylinder>
+          )}
+          )}
         </a-entity>
         {/* <a-entity ref={solarRef}>
         {
           data.map((item, index) =>{
             return(
-              <a-box key={index} onClick={() => console.log(item.clouds `On ${item.datetimeStr}, weather condition is ${item.conditions}, weather type is ${item.weathertype}`)}></a-box>
+              <a-cylinder key={index} onClick={() => console.log(item.clouds `On ${item.datetimeStr}, weather condition is ${item.conditions}, weather type is ${item.weathertype}`)}></a-cylinder>
             )
           })
         }
@@ -246,7 +279,17 @@ function Chart() {
         {
           data.map((item, index) =>{
             return(
-              <a-box key={index} onClick={() => console.log(item.clouds `On ${item.datetimeStr}, weather condition is ${item.conditions}, weather type is ${item.weathertype}`)}></a-box>
+              <a-cylinder key={index} onClick={() => {
+                toast.success(
+                  <>
+                  <h2>On {item.datetimeStr}</h2>
+                  <h3>Cloud Cover: {item.wgust}</h3>
+                  <h3>Weather Condition: {item.conditions}</h3>
+                  <h3>Weather Type: {item.weathertype}</h3>
+                  <h3>Sea Level Pressure: {item.sealevelpressure}</h3>
+                  </>
+                )
+              }}></a-cylinder>
             )
           })
         }
@@ -255,7 +298,17 @@ function Chart() {
         {
           data.map((item, index) =>{
             return(
-              <a-box key={index} onClick={() => console.log(item.clouds `On ${item.datetimeStr}, weather condition is ${item.conditions}, weather type is ${item.weathertype}`)}></a-box>
+              <a-cylinder key={index} onClick={() => {
+                toast.success(
+                  <>
+                  <h2>On {item.datetimeStr}</h2>
+                  <h3>Cloud Cover: {item.wspd}</h3>
+                  <h3>Weather Condition: {item.conditions}</h3>
+                  <h3>Weather Type: {item.weathertype}</h3>
+                  <h3>Sea Level Pressure: {item.sealevelpressure}</h3>
+                  </>
+                )
+              }}></a-cylinder>
             )
           })
         }
@@ -267,6 +320,9 @@ function Chart() {
           rotation="-90 0 0"
           position="0 0 0.8"
         ></a-plane>
+        <a-entity line="start: -7.2 -0.7 -6; end: -7.2 10 -6" line__2="start: 7.4 -0.7 -6; end: 7.4 10 -6" line__3= "start: 7.4 -0.7 5; end: 7.4 10 5" >
+        </a-entity>
+        {/* <a-cylinder color="crimson" height="6" radius="1.5"></a-cylinder> */}
 
         <a-entity id="center-target" position="0 1.6 -0.5"></a-entity>
       </a-scene>
