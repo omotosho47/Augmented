@@ -17,6 +17,7 @@ function Chart() {
   const wgustRef = React.useRef();
   const windRef = React.useRef();
 
+  // Fetch data 
   React.useEffect(() => {
     const fetchData = async () => {
       const options = {
@@ -38,12 +39,12 @@ function Chart() {
         },
       };
 
+
       try {
         axios
           .request(options)
           .then(function (response) {
             const resp = response.data.locations.Bangor;
-            // console.log("newly fetched", resp);
             setData(resp);
             localStorage.setItem("webAR", JSON.stringify(resp));
           })
@@ -51,28 +52,30 @@ function Chart() {
             console.error(error);
           });
       } catch (err) {
-        console.error(err);
+        toast.error(
+          <h2>Unable to get data {err.message}</h2>
+        )
       }
     };
+
+    // Check for cached data 
 
     const cached = localStorage.getItem("webAR");
 
     if (cached) {
       const cachedData = JSON.parse(cached);
       setData(cachedData.values);
-      // console.log("cached", cachedData);
     } else {
       fetchData();
       console.log("trying to fetch");
     }
   }, []);
 
-  // console.log(data)
+  // Define the scale and color array for the bars
 
   const width = 15
   const height = 10
   const heightScale = d3.scaleLinear().domain([0, 100]).range([0, 8])
-
   const xColor = d3.scaleLinear()
         .domain([0, 100])
         .range([
@@ -83,19 +86,12 @@ function Chart() {
           "#ff6600",
           "#c00000",
         ]);
+        const tickValues = heightScale.ticks(10);
 
-      const xDate = d3.scaleBand().domain([data.datetimeStr]).range([0, width])
-
-      const tickValues = heightScale.ticks(10);
-
-  // const tick = d3
-  //   .scaleBand()
-  //   .domain(data.dates)
-  //   .range([0, 18])
-  //   .padding(0.000009);
+// Manipulating the DOM 
 
   React.useEffect(() =>{
-
+// Check if data is fetched or cached
     if(data.length > 1){
       const box = d3.select(humidityRef.current)
       box.selectAll("a-box")
@@ -134,7 +130,7 @@ function Chart() {
       const box = d3.select(cloudRef.current)
       box.selectAll("a-cylinder")
       .data(data)
-      .attr("color", "crimson")
+      .attr("color",(d) => xColor(d.cloudcover))
       .attr("radius", "0.6")
       .attr("height", (d) => heightScale(d.cloudcover))
       .attr("position", (d, i) => {
@@ -149,7 +145,7 @@ function Chart() {
       const box = d3.select(windRef.current)
       box.selectAll("a-cylinder")
       .data(data)
-      .attr("color", "magenta")
+      .attr("color",(d) => xColor(d.wspd))
       .attr("radius", "0.6")
       .attr("height", (d) => heightScale(d.wspd))
       .attr("position", (d, i) => {
@@ -160,26 +156,26 @@ function Chart() {
       });
     }
 
-    if(data.length > 1){
-      const box = d3.select(solarRef.current)
-      box.selectAll("a-cylinder")
-      .data(data)
-      .attr("color", "blue")
-      .attr("radius", "0.6")
-      .attr("height", (d) => heightScale(d.solarradiation))
-      .attr("position", (d, i) => {
-        const x = (i * 1.5) - 5 ;
-        const y = heightScale(d.solarradiation) / 2;
-        const z = -7.5;
-        return `${x} ${y} ${z}`;
-      });
-    }
+    // if(data.length > 1){
+    //   const box = d3.select(solarRef.current)
+    //   box.selectAll("a-cylinder")
+    //   .data(data)
+    //   .attr("color", "blue")
+    //   .attr("radius", "0.6")
+    //   .attr("height", (d) => heightScale(d.solarradiation))
+    //   .attr("position", (d, i) => {
+    //     const x = (i * 1.5) - 5 ;
+    //     const y = heightScale(d.solarradiation) / 2;
+    //     const z = -7.5;
+    //     return `${x} ${y} ${z}`;
+    //   });
+    // }
 
     if(data.length > 1){
       const box = d3.select(wgustRef.current)
       box.selectAll("a-cylinder")
       .data(data)
-      .attr("color", "yellow")
+      .attr("color", (d) => xColor(d.wqust))
       .attr("radius", "0.6")
       .attr("height", (d) => heightScale(d.wgust))
       .attr("position", (d, i) => {
@@ -196,27 +192,28 @@ function Chart() {
   return (
     <>
     <ToastContainer />
-      <a-scene cursor="rayOrigin: mouse" stats ref={sceneRef}>
+      <a-scene cursor="rayOrigin: mouse" stats ref={sceneRef} embedded arjs>
+      {/* <a-marker-camera preset='hiro'></a-marker-camera>    AR Marker */}
         <a-entity
           camera=""
-          position="0 10 20"
+          position="0 10 19"
           
         ></a-entity>
         <Text
           id="center"
           value="Climate data for Bangor University"
-          position="0 0.5 2"
+          position="0 11.5 2"
+          scale="6 6 6"
         />
         {
-          tickValues.map((item, index) => {
-            // console.log(item)
-            return(
-              <>
-              <a-entity key={index} line={`start: -7.2 ${heightScale(item)} -6; end: 7.4 ${heightScale(item)} -6; color: lightblue`}></a-entity>
-              <a-entity key={index + 20} line={`start: 7.4 ${heightScale(item)} -6; end: 7.4 ${heightScale(item)} 5; color: lightblue`}></a-entity>
-              </>
-            )
-          })
+          tickValues.map((item, index) => (
+            <a-entity key={index}>
+              <a-entity line={`start: -7.2 ${heightScale(item)} -6; end: 7.4 ${heightScale(item)} -6; color: lightblue`}></a-entity>
+              <a-entity line={`start: 7.4 ${heightScale(item)} -6; end: 7.4 ${heightScale(item)} 5; color: lightblue`}></a-entity>
+              <Text value={item} position={`7.8 ${heightScale(item)} 5`} color="blue"/>
+              <Text value={item} position={`-7.6 ${heightScale(item)} -6`} color="blue"/>
+            </a-entity>
+          ))
         }
         {/* <a-entity line="start: -7.2 5 3; end: 7.2 5 3; color: red"></a-entity> */}
 
@@ -240,7 +237,7 @@ function Chart() {
                   <h3>Temperature: {item.temp}</h3>
                   <h3>Weather Condition: {item.conditions}</h3>
                   <h3>Weather Type: {item.weathertype}</h3>
-                  <h3>Sea Level Pressure: {item.sealevelpressure}</h3>
+                  <h3>Sea Level Pressure: {item.solarradiation}</h3>
                   </>
                 )
               }}></a-cylinder>
@@ -322,7 +319,6 @@ function Chart() {
         ></a-plane>
         <a-entity line="start: -7.2 -0.7 -6; end: -7.2 10 -6" line__2="start: 7.4 -0.7 -6; end: 7.4 10 -6" line__3= "start: 7.4 -0.7 5; end: 7.4 10 5" >
         </a-entity>
-        {/* <a-cylinder color="crimson" height="6" radius="1.5"></a-cylinder> */}
 
         <a-entity id="center-target" position="0 1.6 -0.5"></a-entity>
       </a-scene>
