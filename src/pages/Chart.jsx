@@ -5,6 +5,7 @@ import * as d3 from "d3"
 import Text from "../components/Text";
 import {toast, ToastContainer} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css";
+import Legend from "../components/Legend"
 
 
 function Chart() {
@@ -81,8 +82,6 @@ function Chart() {
   const heightScale = d3.scaleLinear().domain([0, 100]).range([0, 8])
         const tickValues = heightScale.ticks(10);
         const xTickValues = heightScale.ticks(8);
-
-        const wordArray = 
 
 // Manipulating the DOM 
 
@@ -191,6 +190,7 @@ function Chart() {
           position="0 10 19"
           
         ></a-entity>
+        <Legend />
         <Text
           id="center"
           value="Climate data for Bangor University"
