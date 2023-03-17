@@ -82,6 +82,8 @@ function Chart() {
         const tickValues = heightScale.ticks(10);
         const xTickValues = heightScale.ticks(8);
 
+        const wordArray = 
+
 // Manipulating the DOM 
 
   React.useEffect(() =>{
@@ -120,7 +122,7 @@ function Chart() {
       const box = d3.select(cloudRef.current)
       box.selectAll("a-cylinder")
       .data(data)
-      .attr("color", "yellow")
+      .attr("color", "green")
       .attr("radius", "0.6")
       .attr("height", (d) => heightScale(d.cloudcover))
       .attr("position", (d, i) => {
@@ -165,7 +167,7 @@ function Chart() {
       const box = d3.select(wgustRef.current)
       box.selectAll("a-cylinder")
       .data(data)
-      .attr("color", "pink")
+      .attr("color", "crimson")
       .attr("radius", "0.6")
       .attr("height", (d) => heightScale(d.wgust))
       .attr("position", (d, i) => {
