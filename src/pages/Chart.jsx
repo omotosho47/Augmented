@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import axios from "axios";
 import "aframe";
 import * as d3 from "d3"
@@ -6,16 +6,17 @@ import Text from "../components/Text";
 import {toast, ToastContainer} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css";
 
+
 function Chart() {
   const [data, setData] = React.useState([]);
-
   const sceneRef = React.useRef();
   const humidityRef = React.useRef();
   const temperatureRef = React.useRef();
   const cloudRef = React.useRef();
-  const solarRef = React.useRef();
+  const solarRef = React.useRef(); 
   const wgustRef = React.useRef();
   const windRef = React.useRef();
+
 
   // Fetch data 
   React.useEffect(() => {
@@ -39,17 +40,18 @@ function Chart() {
         },
       };
 
-
       try {
         axios
           .request(options)
           .then(function (response) {
             const resp = response.data.locations.Bangor;
             setData(resp);
+            // cache it
             localStorage.setItem("webAR", JSON.stringify(resp));
           })
           .catch(function (error) {
-            console.error(error);
+            toast.error("Error fetching the data", error.message)
+            console.error(error.message)
           });
       } catch (err) {
         toast.error(
@@ -75,18 +77,10 @@ function Chart() {
 
   const width = 15
   const height = 10
+
   const heightScale = d3.scaleLinear().domain([0, 100]).range([0, 8])
-  const xColor = d3.scaleLinear()
-        .domain([0, 100])
-        .range([
-          "#0072c6",
-          "#00b050",
-          "#ffc000",
-          "#ff9900",
-          "#ff6600",
-          "#c00000",
-        ]);
         const tickValues = heightScale.ticks(10);
+        const xTickValues = heightScale.ticks(8);
 
 // Manipulating the DOM 
 
@@ -94,10 +88,10 @@ function Chart() {
 // Check if data is fetched or cached
     if(data.length > 1){
       const box = d3.select(humidityRef.current)
-      box.selectAll("a-box")
+      box.selectAll("a-cylinder")
       .data(data)
-      .attr("color", (d) => xColor(d.humidity))
-      .attr("shadow", "cast: true; receive: true;")
+      .attr("color", "magenta")
+      .attr("radius", "0.6")
       .attr("height", (d) => heightScale(d.humidity))
       .attr("position", (d, i) => {
         const x = (i * 1.5) - 5 ;
@@ -111,13 +105,9 @@ function Chart() {
       const box = d3.select(temperatureRef.current)
       box.selectAll("a-cylinder")
       .data(data)
-      .attr("color", (d) => xColor(d.temp))
+      .attr("color", "lightblue")
       .attr("radius", "0.6")
       .attr("height", (d) => heightScale(d.temp))
-      .attr(
-        "animation",
-        "property: rotation; to: 0 360 0; loop: true; dur: 20000"
-      )
       .attr("position", (d, i) => {
         const x = (i * 1.5) - 5 ;
         const y = heightScale(d.temp) / 2;
@@ -130,7 +120,7 @@ function Chart() {
       const box = d3.select(cloudRef.current)
       box.selectAll("a-cylinder")
       .data(data)
-      .attr("color",(d) => xColor(d.cloudcover))
+      .attr("color", "crimson")
       .attr("radius", "0.6")
       .attr("height", (d) => heightScale(d.cloudcover))
       .attr("position", (d, i) => {
@@ -145,7 +135,7 @@ function Chart() {
       const box = d3.select(windRef.current)
       box.selectAll("a-cylinder")
       .data(data)
-      .attr("color",(d) => xColor(d.wspd))
+      .attr("color", "red")
       .attr("radius", "0.6")
       .attr("height", (d) => heightScale(d.wspd))
       .attr("position", (d, i) => {
@@ -156,26 +146,26 @@ function Chart() {
       });
     }
 
-    // if(data.length > 1){
-    //   const box = d3.select(solarRef.current)
-    //   box.selectAll("a-cylinder")
-    //   .data(data)
-    //   .attr("color", "blue")
-    //   .attr("radius", "0.6")
-    //   .attr("height", (d) => heightScale(d.solarradiation))
-    //   .attr("position", (d, i) => {
-    //     const x = (i * 1.5) - 5 ;
-    //     const y = heightScale(d.solarradiation) / 2;
-    //     const z = -7.5;
-    //     return `${x} ${y} ${z}`;
-    //   });
-    // }
+    if(data.length > 1){
+      const box = d3.select(solarRef.current)
+      box.selectAll("a-cylinder")
+      .data(data)
+      .attr("color", "green")
+      .attr("radius", "0.6")
+      .attr("height", (d) => heightScale(d.solarradiation))
+      .attr("position", (d, i) => {
+        const x = (i * 1.5) - 5 ;
+        const y = heightScale(d.solarradiation) / 2;
+        const z = -7.5;
+        return `${x} ${y} ${z}`;
+      });
+    }
 
     if(data.length > 1){
       const box = d3.select(wgustRef.current)
       box.selectAll("a-cylinder")
       .data(data)
-      .attr("color", (d) => xColor(d.wqust))
+      .attr("color", "pink")
       .attr("radius", "0.6")
       .attr("height", (d) => heightScale(d.wgust))
       .attr("position", (d, i) => {
@@ -193,7 +183,7 @@ function Chart() {
     <>
     <ToastContainer />
       <a-scene cursor="rayOrigin: mouse" stats ref={sceneRef} embedded arjs>
-      {/* <a-marker-camera preset='hiro'></a-marker-camera>    AR Marker */}
+      {/* <a-marker-camera preset='hiro'></a-marker-camera>     */}
         <a-entity
           camera=""
           position="0 10 19"
@@ -215,17 +205,33 @@ function Chart() {
             </a-entity>
           ))
         }
-        {/* <a-entity line="start: -7.2 5 3; end: 7.2 5 3; color: red"></a-entity> */}
+        {/* {
+          xTickValues.map((tickValue, i) => {
+            return data.map((item, j) => {
+              return <Text key={`${i}-${j}`} value={item.datetimeStr} position={`${heightScale(tickValue)} 1 5`} color="blue" rotation={`${Math.PI * -10.5} 100 0`} />;
+            });
+          })
+        } */}
 
-        {/* <a-entity ref={humidityRef}>
+        <a-entity ref={humidityRef}>
         {
           data.map((item, index) =>{
             return(
-              <a-box key={index} onClick={() => console.log(item.humidity `On ${item.datetimeStr}, weather condition is ${item.conditions}, weather type is ${item.weathertype}`)}></a-box>
+              <a-cylinder key={index} onClick={() => {
+                toast.success(
+                  <>
+                  <h2>On {item.datetimeStr}</h2>
+                  <h3>Temperature: {item.humidity}</h3>
+                  <h3>Weather Condition: {item.conditions}</h3>
+                  <h3>Weather Type: {item.weathertype}</h3>
+                  <h3>Sea Level Pressure: {item.solarradiation}</h3>
+                  </>
+                )
+              }}></a-cylinder>
             )
           })
         }
-        </a-entity> */}
+        </a-entity>
         <a-entity ref={temperatureRef}>
         {
           data.map((item, index) =>{
@@ -263,15 +269,25 @@ function Chart() {
           )}
           )}
         </a-entity>
-        {/* <a-entity ref={solarRef}>
+        <a-entity ref={solarRef}>
         {
           data.map((item, index) =>{
             return(
-              <a-cylinder key={index} onClick={() => console.log(item.clouds `On ${item.datetimeStr}, weather condition is ${item.conditions}, weather type is ${item.weathertype}`)}></a-cylinder>
+              <a-cylinder key={index} onClick={() => {
+                toast.success(
+                  <>
+                  <h2>On {item.datetimeStr}</h2>
+                  <h3>Temperature: {item.solarradiation}</h3>
+                  <h3>Weather Condition: {item.conditions}</h3>
+                  <h3>Weather Type: {item.weathertype}</h3>
+                  <h3>Sea Level Pressure: {item.solarradiation}</h3>
+                  </>
+                )
+              }}></a-cylinder>
             )
           })
         }
-        </a-entity> */}
+        </a-entity>
         <a-entity ref={wgustRef}>
         {
           data.map((item, index) =>{
