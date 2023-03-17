@@ -97,7 +97,7 @@ function Chart() {
       .attr("position", (d, i) => {
         const x = (i * 1.5) - 5 ;
         const y = heightScale(d.humidity) / 2;
-        const z = -5.5;
+        const z = -3.5;
         return `${x} ${y} ${z}`;
       });
     }
@@ -127,7 +127,7 @@ function Chart() {
       .attr("position", (d, i) => {
         const x = (i * 1.5) - 5 ;
         const y = heightScale(d.cloudcover) / 2;
-        const z = -3.5;
+        const z = -5.5;
         return `${x} ${y} ${z}`;
       });
     }
