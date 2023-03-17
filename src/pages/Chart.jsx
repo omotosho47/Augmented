@@ -87,20 +87,20 @@ function Chart() {
 
   React.useEffect(() =>{
 // Check if data is fetched or cached
-    // if(data.length > 1){
-    //   const box = d3.select(humidityRef.current)
-    //   box.selectAll("a-cylinder")
-    //   .data(data)
-    //   .attr("color", "magenta")
-    //   .attr("radius", "0.6")
-    //   .attr("height", (d) => heightScale(d.humidity))
-    //   .attr("position", (d, i) => {
-    //     const x = (i * 1.5) - 5 ;
-    //     const y = heightScale(d.humidity) / 2;
-    //     const z = -5.5;
-    //     return `${x} ${y} ${z}`;
-    //   });
-    // }
+    if(data.length > 1){
+      const box = d3.select(humidityRef.current)
+      box.selectAll("a-cylinder")
+      .data(data)
+      .attr("color", "yellow")
+      .attr("radius", "0.6")
+      .attr("height", (d) => heightScale(d.humidity))
+      .attr("position", (d, i) => {
+        const x = (i * 1.5) - 5 ;
+        const y = heightScale(d.humidity) / 2;
+        const z = -5.5;
+        return `${x} ${y} ${z}`;
+      });
+    }
 
     if(data.length > 1){
       const box = d3.select(temperatureRef.current)
@@ -215,7 +215,7 @@ function Chart() {
           })
         } */}
 
-        {/* <a-entity ref={humidityRef}>
+        <a-entity ref={humidityRef}>
         {
           data.map((item, index) =>{
             return(
@@ -233,7 +233,7 @@ function Chart() {
             )
           })
         }
-        </a-entity> */}
+        </a-entity>
         <a-entity ref={temperatureRef}>
         {
           data.map((item, index) =>{
