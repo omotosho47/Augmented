@@ -77,7 +77,6 @@ function Chart() {
 
   const heightScale = d3.scaleLinear().domain([0, 100]).range([0, 8]);
   const tickValues = heightScale.ticks(10);
-  const xTickValues = heightScale.ticks(8);
 
     const zLabels = [
       { position:  "-8 1 -0.9", text: "Humidity" },
@@ -86,12 +85,6 @@ function Chart() {
       { position: "-8, 1 4.5", text: "Temperature" },
       { position: "-8, 1 -1.8", text: "Cloud Cover" },
     ];
-
-  const xLabel = d3
-    .scaleBand()
-    .domain([data.datetimeStr])
-    .range([0, 10])
-    .padding(0.2);
 
   // Manipulating the DOM
 
