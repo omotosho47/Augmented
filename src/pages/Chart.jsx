@@ -176,9 +176,15 @@ function Chart() {
   return (
     <>
       <ToastContainer />
-      <a-scene embedded arjs="sourceType: webcam">
+      {/* <a-scene ref={sceneRef} > */}
+      {/* <a-scene  embedded arjs="sourceType: webcam" ref={sceneRef} > */}
+      <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;' ref={sceneRef}>
+
+      
+        {/* <a-marker-camera preset='hiro'></a-marker-camera>     */}
+        {/* <a-entity camera="" position="0 10 19" look-controls=""></a-entity> */}
+
         <a-marker preset="hiro">
-          <a-entity camera="" position="0 10 19" look-controls=""></a-entity>
           <Legend />
           <Text
             id="center"
@@ -352,8 +358,8 @@ function Chart() {
             line__2="start: 7.4 -0.7 -6; end: 7.4 10 -6"
             line__3="start: 7.4 -0.7 5; end: 7.4 10 5"
           ></a-entity>
-        </a-marker>
-        <a-entity camera></a-entity>
+         </a-marker>
+         <a-entity-camera></a-entity-camera>
       </a-scene>
     </>
   );
