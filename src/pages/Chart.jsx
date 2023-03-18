@@ -178,7 +178,7 @@ function Chart() {
       <ToastContainer />
       {/* <a-scene ref={sceneRef} > */}
       {/* <a-scene  embedded arjs="sourceType: webcam" ref={sceneRef} > */}
-      <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;' ref={sceneRef}>
+      <a-scene embedded arjs ref={sceneRef}>
 
       
         {/* <a-marker-camera preset='hiro'></a-marker-camera>     */}
