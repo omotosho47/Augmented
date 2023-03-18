@@ -1,5 +1,3 @@
-import React, { useEffect, useRef, useState } from "react";
-import "aframe";
 
 function Text({
   position = "1 2 1",

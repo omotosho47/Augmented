@@ -1,12 +1,9 @@
 import React from "react";
 import axios from "axios";
-import "aframe";
-import * as d3 from "d3";
 import Text from "../components/Text";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Legend from "../components/Legend";
-import "aframe-ar";
 
 function Chart() {
   const [data, setData] = React.useState([]);
@@ -177,14 +174,7 @@ function Chart() {
   return (
     <>
       <ToastContainer />
-      {/* <a-scene ref={sceneRef} > */}
-      {/* <a-scene  embedded arjs="sourceType: webcam" ref={sceneRef} > */}
-      <a-scene ar ref={sceneRef}>
-
-      
-        {/* <a-marker-camera preset='hiro'></a-marker-camera>     */}
-        {/* <a-entity camera="" position="0 10 19" look-controls=""></a-entity> */}
-
+      <a-scene ref={sceneRef}>
         <a-marker preset="hiro">
           <Legend />
           <Text
@@ -360,7 +350,6 @@ function Chart() {
             line__3="start: 7.4 -0.7 5; end: 7.4 10 5"
           ></a-entity>
          </a-marker>
-         <a-entity-camera></a-entity-camera>
       </a-scene>
     </>
   );
