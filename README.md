@@ -23,7 +23,7 @@ Use your mobile device to scan the AR marker to open the Web AR scene.
 Wait for the scene to load and display the 3D objects representing the environmental data.
 The app will retrieve environmental data from a public API and display it as 3D objects in the Web AR scene. You can interact with the objects by moving your mobile device around the scene, and you can view detailed information about the data by clicking on the objects.
 
-Contributing
+## Contributing
 If you would like to contribute to this project, please follow these steps:
 
 Fork the repository and clone it to your local machine.
@@ -33,7 +33,7 @@ Push your changes to your forked repository.
 Submit a pull request to the main repository.
 
 ## Credits
-This project was created by [Your Name] as a project for Bangor University. The app uses the following technologies:
+This project was created by Akeem Olamilekan Omotosho as a project for Bangor University. The app uses the following technologies:
 
 - React: https://reactjs.org/
 - Aframe: https://aframe.io/
