@@ -5,7 +5,7 @@ import ModuleErrorBoundary from "./components/ErrorBoundary"
 function App() {
 
   return (
-    <div className="App">
+    <div>
       <Router>
         <Routes>
           <Route element={<ModuleErrorBoundary />} path="/" />

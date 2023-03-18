@@ -174,7 +174,7 @@ function Chart() {
   return (
     <>
       <ToastContainer />
-      <a-scene ref={sceneRef} embedded arjs>
+      <a-scene ref={sceneRef} embedded arjs="trackingMethod: artoolkit;">
         <a-marker preset="hiro">
         <a-box position='0 0.5 0' material='color: yellow;'></a-box>
           <Legend />
