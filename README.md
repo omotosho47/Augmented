@@ -35,9 +35,9 @@ Submit a pull request to the main repository.
 ## Credits
 This project was created by [Your Name] as a project for Bangor University. The app uses the following technologies:
 
-React: https://reactjs.org/
-Aframe: https://aframe.io/
-D3: https://d3js.org/
-The app also uses the following public API to retrieve environmental data:
+- React: https://reactjs.org/
+- Aframe: https://aframe.io/
+- D3: https://d3js.org/
 
-Visulal Crossing Weather: https://rapidapi.com/visual-crossing-corporation-visual-crossing-corporation-default/api/visual-crossing-weather
+ The app also use this public API to retrieve environmental data:
+- Visulal Crossing Weather: https://rapidapi.com/visual-crossing-corporation-visual-crossing-corporation-default/api/visual-crossing-weather
