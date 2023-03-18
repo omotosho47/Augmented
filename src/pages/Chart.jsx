@@ -176,6 +176,7 @@ function Chart() {
       <ToastContainer />
       <a-scene ref={sceneRef}>
         <a-marker preset="hiro">
+        <a-box position='0 0.5 0' material='color: yellow;'></a-box>
           <Legend />
           <Text
             id="center"
