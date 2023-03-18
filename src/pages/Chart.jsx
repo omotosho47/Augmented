@@ -230,9 +230,9 @@ function Chart() {
             <Text
               key={i}
               value={date}
-              position={`${i * 1.45 - 4} 1 6.5`}
+              position={`${i * 1.35 - 4} 1 6.5`}
               color="blue"
-              rotation="-60 -60 0"
+              rotation="-60 -60 -10"
             />
           );
         })}
@@ -257,11 +257,11 @@ function Chart() {
                 onClick={() => {
                   toast.success(
                     <>
-                      <h2>On {item.datetimeStr}</h2>
-                      <h3>Temperature: {item.humidity}</h3>
+                      <h2>On {item.datetimeStr.slice(0, 10)}</h2>
+                      <h3>Humidity: {item.humidity}%</h3>
                       <h3>Weather Condition: {item.conditions}</h3>
                       <h3>Weather Type: {item.weathertype}</h3>
-                      <h3>Sea Level Pressure: {item.solarradiation}</h3>
+                      <h3>Sea Level Pressure: {item.sealevelpressure} hPa</h3>
                     </>
                   );
                 }}
@@ -277,11 +277,11 @@ function Chart() {
                 onClick={() => {
                   toast.success(
                     <>
-                      <h2>On {item.datetimeStr}</h2>
-                      <h3>Temperature: {item.temp}</h3>
+                      <h2>On {item.datetimeStr.slice(0, 10)}</h2>
+                      <h3>Temperature: {item.temp}°C</h3>
                       <h3>Weather Condition: {item.conditions}</h3>
                       <h3>Weather Type: {item.weathertype}</h3>
-                      <h3>Sea Level Pressure: {item.solarradiation}</h3>
+                      <h3>Solar Radiation: {item.solarradiation}W/m²</h3>
                     </>
                   );
                 }}
@@ -297,11 +297,10 @@ function Chart() {
                 onClick={() => {
                   toast.success(
                     <>
-                      <h2>On {item.datetimeStr}</h2>
-                      <h3>Cloud Cover: {item.cloudcover}</h3>
+                      <h2>On {item.datetimeStr.slice(0, 10)}</h2>
+                      <h3>Cloud Cover: {item.cloudcover}%</h3>
                       <h3>Weather Condition: {item.conditions}</h3>
                       <h3>Weather Type: {item.weathertype}</h3>
-                      <h3>Sea Level Pressure: {item.sealevelpressure}</h3>
                     </>
                   );
                 }}
@@ -317,11 +316,11 @@ function Chart() {
                 onClick={() => {
                   toast.success(
                     <>
-                      <h2>On {item.datetimeStr}</h2>
-                      <h3>Cloud Cover: {item.wgust}</h3>
+                      <h2>On {item.datetimeStr.slice(0, 10)}</h2>
+                      <h3>Wind Gauge: {item.wgust}m/s</h3>
                       <h3>Weather Condition: {item.conditions}</h3>
                       <h3>Weather Type: {item.weathertype}</h3>
-                      <h3>Sea Level Pressure: {item.sealevelpressure}</h3>
+                      <h3>Wind direction: {item.wdir} degrees</h3>
                     </>
                   );
                 }}
@@ -337,11 +336,11 @@ function Chart() {
                 onClick={() => {
                   toast.success(
                     <>
-                      <h2>On {item.datetimeStr}</h2>
-                      <h3>Cloud Cover: {item.wspd}</h3>
+                      <h2>On {item.datetimeStr.slice(0, 10)}</h2>
+                      <h3>Wind Speed: {item.wspd}m/s</h3>
                       <h3>Weather Condition: {item.conditions}</h3>
                       <h3>Weather Type: {item.weathertype}</h3>
-                      <h3>Sea Level Pressure: {item.sealevelpressure}</h3>
+                      <h3>Sea Level Pressure: {item.sealevelpressure} hPa</h3>
                     </>
                   );
                 }}
