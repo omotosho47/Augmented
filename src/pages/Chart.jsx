@@ -174,9 +174,10 @@ function Chart() {
   return (
     <>
       <ToastContainer />
-      <a-scene ref={sceneRef} embedded arjs="trackingMethod: artoolkit;">
+      {/* <a-scene ref={sceneRef} embedded arjs="trackingMethod: artoolkit"> */}
+      <a-scene ref={sceneRef} embedded arjs="sourceType: webcam">
         <a-marker preset="hiro">
-        <a-box position='0 0.5 0' material='color: yellow;'></a-box>
+        <a-box position='0 0.5 0' scale="1 1 1" material='color: yellow;'></a-box>
           <Legend />
           <Text
             id="center"
