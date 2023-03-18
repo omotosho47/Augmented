@@ -6,6 +6,7 @@ import Text from "../components/Text";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Legend from "../components/Legend";
+import "aframe-ar";
 
 function Chart() {
   const [data, setData] = React.useState([]);
@@ -178,7 +179,7 @@ function Chart() {
       <ToastContainer />
       {/* <a-scene ref={sceneRef} > */}
       {/* <a-scene  embedded arjs="sourceType: webcam" ref={sceneRef} > */}
-      <a-scene embedded arjs ref={sceneRef}>
+      <a-scene ar ref={sceneRef}>
 
       
         {/* <a-marker-camera preset='hiro'></a-marker-camera>     */}
