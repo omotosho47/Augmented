@@ -178,8 +178,8 @@ function Chart() {
       <a-scene ref={sceneRef} embedded arjs="sourceType: webcam">
       {/* <a-scene ref={sceneRef} embedded arjs> */}
         {/* <a-entity camera></a-entity> */}
-        <a-marker-camera preset="hiro">
-        <a-entity position="0 0 16">
+        <a-marker preset="hiro">
+        <a-entity position="0 3 17">
         <a-box position='0 0.5 0' scale="1 1 1" material='color: yellow;'></a-box>
           <Legend />
           <Text
@@ -355,8 +355,8 @@ function Chart() {
             line__3="start: 7.4 -0.7 5; end: 7.4 10 5"
           ></a-entity>
         </a-entity>
-         </a-marker-camera>
-         {/* <a-entity camera></a-entity> */}
+         </a-marker>
+         <a-entity camera></a-entity>
          {/* <a-entity camera="" position="0 10 19" look-controls=""></a-entity> */}
          {/* <a-entity camera ></a-entity> */}
       </a-scene>
