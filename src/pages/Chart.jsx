@@ -169,8 +169,6 @@ function Chart() {
     }
   }, [data]);
 
-  // console.log(data)
-
   return (
     <>
       <ToastContainer />
@@ -355,7 +353,6 @@ function Chart() {
           ></a-entity>
         {/* </a-entity> */}
          </a-marker>
-         {/* <a-entity camera></a-entity> */}
          <a-entity camera="" position="-5 5 19" look-controls=""></a-entity>
          {/* <a-entity camera ></a-entity> */}
       </a-scene>
