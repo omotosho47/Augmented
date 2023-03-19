@@ -357,7 +357,7 @@ function Chart() {
         {/* </a-entity> */}
          </a-marker>
          {/* <a-entity camera></a-entity> */}
-         <a-entity camera="" position="0 10 19" look-controls=""></a-entity>
+         <a-entity camera="" position="0 5 19" look-controls=""></a-entity>
          {/* <a-entity camera ></a-entity> */}
       </a-scene>
     </>
