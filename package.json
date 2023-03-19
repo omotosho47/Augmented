@@ -1,12 +1,11 @@
 {
-  "homepage": "https://omotosho47.github.io/Web-AR",
+  "homepage": "https://github.com/omotosho47.github.io/Web-AR",
   "name": "augmented-reality",
   "private": false,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "build": "vite build",
     "preview": "vite preview"
