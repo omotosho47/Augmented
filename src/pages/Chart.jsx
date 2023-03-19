@@ -180,7 +180,6 @@ function Chart() {
         {/* <a-entity camera></a-entity> */}
         <a-marker preset="hiro">
         {/* <a-entity position="0 -9 20"> */}
-        <a-box position='0 0.5 0' scale="1 1 1" material='color: yellow;'></a-box>
           <Legend />
           <Text
             id="center"
@@ -357,7 +356,7 @@ function Chart() {
         {/* </a-entity> */}
          </a-marker>
          {/* <a-entity camera></a-entity> */}
-         <a-entity camera="" position="0 5 19" look-controls=""></a-entity>
+         <a-entity camera="" position="-5 5 19" look-controls=""></a-entity>
          {/* <a-entity camera ></a-entity> */}
       </a-scene>
     </>
