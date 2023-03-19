@@ -176,6 +176,8 @@ function Chart() {
       <ToastContainer />
       {/* <a-scene ref={sceneRef} embedded arjs="trackingMethod: artoolkit"> */}
       <a-scene ref={sceneRef} embedded arjs="sourceType: webcam">
+      {/* <a-scene ref={sceneRef} embedded arjs> */}
+        {/* <a-entity camera></a-entity> */}
         <a-marker preset="hiro">
         <a-box position='0 0.5 0' scale="1 1 1" material='color: yellow;'></a-box>
           <Legend />
@@ -352,7 +354,8 @@ function Chart() {
             line__3="start: 7.4 -0.7 5; end: 7.4 10 5"
           ></a-entity>
          </a-marker>
-         <a-entity camera></a-entity>
+         {/* <a-entity camera position="0 6 7"></a-entity> */}
+         <a-entity camera ></a-entity>
       </a-scene>
     </>
   );
