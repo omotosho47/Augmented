@@ -179,6 +179,7 @@ function Chart() {
       {/* <a-scene ref={sceneRef} embedded arjs> */}
         {/* <a-entity camera></a-entity> */}
         <a-marker preset="hiro">
+        <a-entity position="0 0 12">
         <a-box position='0 0.5 0' scale="1 1 1" material='color: yellow;'></a-box>
           <Legend />
           <Text
@@ -353,8 +354,9 @@ function Chart() {
             line__2="start: 7.4 -0.7 -6; end: 7.4 10 -6"
             line__3="start: 7.4 -0.7 5; end: 7.4 10 5"
           ></a-entity>
+        </a-entity>
          </a-marker>
-         <a-entity camera position="0 6 7"></a-entity>
+         <a-entity camera position="0 0 10"></a-entity>
          {/* <a-entity camera="" position="0 10 19" look-controls=""></a-entity> */}
          {/* <a-entity camera ></a-entity> */}
       </a-scene>
