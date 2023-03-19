@@ -174,8 +174,8 @@ function Chart() {
   return (
     <>
       <ToastContainer />
-      {/* <a-scene ref={sceneRef} embedded arjs="trackingMethod: artoolkit"> */}
-      <a-scene ref={sceneRef} embedded arjs="sourceType: webcam">
+      <a-scene ref={sceneRef} embedded arjs="trackingMethod: artoolkit">
+      {/* <a-scene ref={sceneRef} embedded arjs="sourceType: webcam"> */}
       {/* <a-scene ref={sceneRef} embedded arjs> */}
         {/* <a-entity camera></a-entity> */}
         <a-marker preset="hiro">
