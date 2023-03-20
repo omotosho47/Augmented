@@ -6,27 +6,27 @@ function Legend() {
     {
       value: "Temperature",
       color: "lightblue",
-      position: "-12 9 1",
+      position: "-5 9 1",
     },
     {
       value: "Cloud Cover",
       color: "green",
-      position: "-12 8 1",
+      position: "-5 8 1",
     },
     {
       value: "Wind Speed",
       color: "blue",
-      position: "-12 7 1",
+      position: "-5 7 1",
     },
     {
       value: "Wind Gauge",
       color: "crimson",
-      position: "-12 6 1",
+      position: "-5 6 1",
     },
     {
       value: "Humidity",
       color: "yellow",
-      position: "-12 5 1",
+      position: "-5 5 1",
     },
   ];
   return (
