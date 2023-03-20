@@ -2,70 +2,47 @@ import React from "react";
 import Text from "./Text";
 
 function Legend() {
-  const legendArray = {
-    temp: {
+  const legendArray = [
+    {
       value: "Temperature",
       color: "lightblue",
+      position: "-12 9 1",
     },
-    cloud: {
+    {
       value: "Cloud Cover",
       color: "green",
+      position: "-12 8 1",
     },
-    wspd: {
+    {
       value: "Wind Speed",
       color: "blue",
+      position: "-12 7 1",
     },
-    hum: {
-      value: "Humidity",
-      color: "yellow",
-    },
-    wgust: {
+    {
       value: "Wind Gauge",
       color: "crimson",
-    }
-  };
+      position: "-12 6 1",
+    },
+    {
+      value: "Humidity",
+      color: "yellow",
+      position: "-12 5 1",
+    },
+  ];
   return (
     <>
-      <Text
-        id="center"
-        value={legendArray.temp.value}
-        position={`-12 9 1`}
-        scale="6 6 6"
-        color={legendArray.temp.color}
-        align="left"
-      />
-      <Text
-        id="center"
-        value={legendArray.cloud.value}
-        position={`-12 8 1`}
-        scale="6 6 6"
-        color={legendArray.cloud.color}
-        align="left"
-      />
-      <Text
-        id="center"
-        value={legendArray.wspd.value}
-        position={`-12 7 1`}
-        scale="6 6 6"
-        color={legendArray.wspd.color}
-        align="left"
-      />
-      <Text
-        id="center"
-        value={legendArray.wgust.value}
-        position={`-12 6 1`}
-        scale="6 6 6"
-        color={legendArray.wgust.color}
-        align="left"
-      />
-      <Text
-        id="center"
-        value={legendArray.hum.value}
-        position={`-12 5 1`}
-        scale="6 6 6"
-        color={legendArray.hum.color}
-        align="left"
-      />
+      <a-entity>
+        {legendArray.map((values, index) => {
+          <Text
+            id="center"
+            value={values.value}
+            position={values.position}
+            scale="6 6 6"
+            color={values.color}
+            align="left"
+          />;
+        })}
+      </a-entity>
     </>
   );
 }
