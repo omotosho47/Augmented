@@ -61,7 +61,7 @@ function Legend() {
       <Text
         id="center"
         value={legendArray.hum.value}
-        position={`-12 5 1`}
+        position={`-11 5 1`}
         scale="6 6 6"
         color={legendArray.hum.color}
         align="left"
