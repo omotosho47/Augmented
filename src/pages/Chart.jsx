@@ -177,7 +177,7 @@ function Chart() {
           <Text
             id="center"
             value="Climate data for Bangor University"
-            position="0 13.5 2"
+            position="0 11.5 2"
             scale="6 6 6"
           />
           <Text

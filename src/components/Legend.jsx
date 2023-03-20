@@ -29,7 +29,7 @@ function Legend() {
       <Text
         id="center"
         value={legendArray.temp.value}
-        position={`-12 9 1`}
+        position={`-11 9 1`}
         scale="6 6 6"
         color={legendArray.temp.color}
         align="left"
@@ -37,7 +37,7 @@ function Legend() {
       <Text
         id="center"
         value={legendArray.cloud.value}
-        position={`-12 8 1`}
+        position={`-11 8 1`}
         scale="6 6 6"
         color={legendArray.cloud.color}
         align="left"
@@ -45,7 +45,7 @@ function Legend() {
       <Text
         id="center"
         value={legendArray.wspd.value}
-        position={`-12 7 1`}
+        position={`-11 7 1`}
         scale="6 6 6"
         color={legendArray.wspd.color}
         align="left"
@@ -53,7 +53,7 @@ function Legend() {
       <Text
         id="center"
         value={legendArray.wgust.value}
-        position={`-12 6 1`}
+        position={`-11 6 1`}
         scale="6 6 6"
         color={legendArray.wgust.color}
         align="left"
