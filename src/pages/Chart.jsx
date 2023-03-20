@@ -347,7 +347,7 @@ function Chart() {
             line__3="start: 7.4 -0.7 5; end: 7.4 10 5"
           ></a-entity>
         </a-marker>
-        <a-entity camera="" position="0 9 19" look-controls=""></a-entity>
+        <a-entity camera="" position="0 0 19" look-controls=""></a-entity>
       </a-scene>
     </>
   );
