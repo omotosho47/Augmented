@@ -172,7 +172,7 @@ function Chart() {
     <>
       <ToastContainer />
       <a-scene ref={sceneRef}>
-        <a-marker preset="hiro">
+        <a-marker preset="hiro" position="0 0 -2" cursor-listener="false" >
           <Legend />
           <Text
             id="center"
@@ -241,6 +241,7 @@ function Chart() {
                 <a-cylinder
                   key={index}
                   onClick={() => {
+                    alert("test");
                     toast.success(
                       <>
                         <h2>On {item.datetimeStr.slice(0, 10)}</h2>
